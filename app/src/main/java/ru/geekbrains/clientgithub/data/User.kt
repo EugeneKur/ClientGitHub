@@ -25,6 +25,10 @@ fun getUsers(): List<User> {
         User(Title("User2", 10, R.drawable.ic_baseline_face_24), "Описание"),
         User(Title("User3", 10, R.drawable.ic_baseline_face_24), "Описание"),
         User(Title("User4", 10, R.drawable.ic_baseline_face_24), "Описание"),
+        User(Title("User5", 10, R.drawable.ic_baseline_face_24), "Описание"),
+        User(Title("User6", 10, R.drawable.ic_baseline_face_24), "Описание"),
+        User(Title("User7", 10, R.drawable.ic_baseline_face_24), "Описание"),
+        User(Title("User8", 10, R.drawable.ic_baseline_face_24), "Описание"),
         )
 }
 
