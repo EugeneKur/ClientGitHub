@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.geekbrains.clientgithub.R
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.ListUsersFragmentBinding
 import ru.geekbrains.clientgithub.utils.AppState
@@ -40,7 +41,15 @@ class ListUsersFragment : Fragment() {
 
 
         adapter.listener = UsersAdapter.OnItemClick { user ->
+            val bundle = Bundle()
+            bundle.putParcelable("USER", user)
 
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, CardUserFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commit()
+            }
         }
 
         viewModel = ViewModelProvider(this).get(ListUsersViewModel::class.java)

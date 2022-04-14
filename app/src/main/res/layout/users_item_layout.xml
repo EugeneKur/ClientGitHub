@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="@dimen/padding_widjet"
     android:layout_margin="@dimen/margin_widjet"
-    tools:context=".ui.MainActivity"
+    tools:context=".ui.ListUsersFragment"
     android:background="@color/teal_200">
 
     <LinearLayout
