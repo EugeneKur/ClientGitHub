@@ -11,4 +11,8 @@ class RepositoryImpl: Repository {
         return getUsers()
     }
 
+    override fun getPojectsUsersFromLocalStorage(user: User): List<String> {
+        return user.title.projects
+    }
+
 }

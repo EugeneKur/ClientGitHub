@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
+import ru.geekbrains.clientgithub.ui.listUsers.ListUsersViewModel
 import ru.geekbrains.clientgithub.utils.AppState
 
 class CardUserFragment : Fragment() {
@@ -22,6 +24,7 @@ class CardUserFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter = GitProjectsAdapter()
 
+    private lateinit var viewModel: CardUserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,15 +39,25 @@ class CardUserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val user = arguments?.getParcelable<User>("USER")
-        val project: List<String> = user?.title?.projects as List<String>
         binding.nameUserTextView.text = user?.title?.name ?: ""
         user?.title?.image?.let { binding.userImageView.setImageResource(it) }
 
-
-
         binding.projectsRecyclerView.adapter = adapter
 
-        adapter.setProject(project)
+        viewModel = ViewModelProvider(this).get(CardUserViewModel::class.java)
+
+        // Подписались на изменения liveData
+        viewModel.getData().observe(viewLifecycleOwner, { state ->
+            render(state)
+        })
+
+        // Запросили новые данные
+        user?.let { viewModel.getProjects(it) }
+//        val project: List<String> = user?.title?.projects as List<String>
+//
+//        binding.projectsRecyclerView.adapter = adapter
+//
+//        adapter.setProject(project)
 
 
     }

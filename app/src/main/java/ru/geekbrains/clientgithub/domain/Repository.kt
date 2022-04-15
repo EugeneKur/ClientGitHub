@@ -7,4 +7,5 @@ interface Repository {
 
     fun getUserFromLocalStorage(): List<User>
 
+    fun getPojectsUsersFromLocalStorage(user: User): List<String>
 }
