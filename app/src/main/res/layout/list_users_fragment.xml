@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black"
-    tools:context=".ui.ListUsersFragment">
+    tools:context=".ui.listUsers.ListUsersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/users_recycler_view"

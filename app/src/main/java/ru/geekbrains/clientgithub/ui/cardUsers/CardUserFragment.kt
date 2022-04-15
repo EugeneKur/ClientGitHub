@@ -1,13 +1,10 @@
-package ru.geekbrains.clientgithub.ui
+package ru.geekbrains.clientgithub.ui.cardUsers
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.card_user_fragment.*
-import ru.geekbrains.clientgithub.R
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
 

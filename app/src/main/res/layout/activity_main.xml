@@ -9,7 +9,7 @@
     tools:context=".ui.MainActivity">
 
     <fragment
-        android:name="ru.geekbrains.clientgithub.ui.ListUsersFragment"
+        android:name="ru.geekbrains.clientgithub.ui.listUsers.ListUsersFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

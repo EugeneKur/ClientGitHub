@@ -1,4 +1,4 @@
-package ru.geekbrains.clientgithub.ui
+package ru.geekbrains.clientgithub.ui.listUsers
 
 import android.view.LayoutInflater
 import android.view.View

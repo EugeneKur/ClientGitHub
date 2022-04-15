@@ -1,4 +1,4 @@
-package ru.geekbrains.clientgithub.ui
+package ru.geekbrains.clientgithub.ui.listUsers
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import ru.geekbrains.clientgithub.R
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.ListUsersFragmentBinding
+import ru.geekbrains.clientgithub.ui.cardUsers.CardUserFragment
 import ru.geekbrains.clientgithub.utils.AppState
 
 class ListUsersFragment : Fragment() {
