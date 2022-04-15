@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
-import ru.geekbrains.clientgithub.ui.listUsers.ListUsersViewModel
 import ru.geekbrains.clientgithub.utils.AppState
 
 class CardUserFragment : Fragment() {
@@ -23,6 +22,7 @@ class CardUserFragment : Fragment() {
     private var _binding: CardUserFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = GitProjectsAdapter()
+    private var name: String = ""
 
     private lateinit var viewModel: CardUserViewModel
 
@@ -50,15 +50,9 @@ class CardUserFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, { state ->
             render(state)
         })
-
+        name = user?.title?.name.toString()
         // Запросили новые данные
-        user?.let { viewModel.getProjects(it) }
-//        val project: List<String> = user?.title?.projects as List<String>
-//
-//        binding.projectsRecyclerView.adapter = adapter
-//
-//        adapter.setProject(project)
-
+        viewModel.getProjects(name)
 
     }
 
