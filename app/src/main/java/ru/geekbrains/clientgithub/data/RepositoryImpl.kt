@@ -10,4 +10,5 @@ class RepositoryImpl: Repository {
     override fun getUserFromLocalStorage(): List<User> {
         return getUsers()
     }
+
 }

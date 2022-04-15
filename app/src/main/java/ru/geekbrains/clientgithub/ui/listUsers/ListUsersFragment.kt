@@ -24,7 +24,6 @@ class ListUsersFragment : Fragment() {
 
     private lateinit var viewModel: ListUsersViewModel
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

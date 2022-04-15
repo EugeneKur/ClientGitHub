@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
+import ru.geekbrains.clientgithub.utils.AppState
 
 class CardUserFragment : Fragment() {
     companion object {
-        fun newInstance(bundle: Bundle?) : CardUserFragment {
+        fun newInstance(bundle: Bundle?): CardUserFragment {
             val fragment = CardUserFragment()
             fragment.arguments = bundle
             return fragment
@@ -19,6 +20,8 @@ class CardUserFragment : Fragment() {
 
     private var _binding: CardUserFragmentBinding? = null
     private val binding get() = _binding!!
+    private val adapter = GitProjectsAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,10 +36,35 @@ class CardUserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val user = arguments?.getParcelable<User>("USER")
-
+        val project: List<String> = user?.title?.projects as List<String>
         binding.nameUserTextView.text = user?.title?.name ?: ""
         user?.title?.image?.let { binding.userImageView.setImageResource(it) }
-        //user_image_view.findViewById<ImageView>(R.id.user_item_image_view).setImageResource(user.title.image)
+
+
+
+        binding.projectsRecyclerView.adapter = adapter
+
+        adapter.setProject(project)
+
+
+    }
+
+    private fun render(state: AppState) {
+
+        when (state) {
+            is AppState.Success<*> -> {
+
+                val project: List<String> = state.data as List<String>
+                adapter.setProject(project)
+            }
+            is AppState.Error -> {
+                // TODO: 14.04.2022
+            }
+            is AppState.Loading -> {
+                // TODO: 14.04.2022
+            }
+        }
+
     }
 
 

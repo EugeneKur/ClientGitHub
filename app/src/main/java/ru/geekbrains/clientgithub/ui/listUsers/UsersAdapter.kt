@@ -15,7 +15,7 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserItemViewHolder>() {
     var listener: OnItemClick? = null
 
 
-    fun setUser (data: List<User>) {
+    fun setUser(data: List<User>) {
         user = data
         notifyDataSetChanged()
     }
@@ -30,16 +30,17 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserItemViewHolder>() {
         holder.bind(user[position])
     }
 
-    override fun getItemCount(): Int =user.size
+    override fun getItemCount(): Int = user.size
 
     fun interface OnItemClick {
-        fun onClick (user: User)
+        fun onClick(user: User)
     }
 
-    inner class UserItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class UserItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(user: User) {
             itemView.findViewById<TextView>(R.id.name_user_item_text_view).text = user.title.name
-            itemView.findViewById<ImageView>(R.id.user_item_image_view).setImageResource(user.title.image)
+            itemView.findViewById<ImageView>(R.id.user_item_image_view)
+                .setImageResource(user.title.image)
             itemView.setOnClickListener {
                 listener?.onClick(user)
             }

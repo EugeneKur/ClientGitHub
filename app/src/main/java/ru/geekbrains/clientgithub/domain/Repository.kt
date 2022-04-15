@@ -6,4 +6,5 @@ interface Repository {
     fun getUserFromServer(): User
 
     fun getUserFromLocalStorage(): List<User>
+
 }

@@ -5,12 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.geekbrains.clientgithub.data.RepositoryImpl
 import ru.geekbrains.clientgithub.domain.Repository
-import ru.geekbrains.clientgithub.ui.UserContracts
 import ru.geekbrains.clientgithub.utils.AppState
 
 class ListUsersViewModel : ViewModel(), UserContracts.ViewModelContract {
 
-    private val  liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
+    private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val repo: Repository = RepositoryImpl()
 
     fun getData(): LiveData<AppState> = liveDataToObserve
@@ -19,7 +18,7 @@ class ListUsersViewModel : ViewModel(), UserContracts.ViewModelContract {
         liveDataToObserve.value = AppState.Loading
 
         Thread {
-            Thread.sleep(2000)
+            Thread.sleep(1000)
 
             val user = repo.getUserFromLocalStorage()
 
