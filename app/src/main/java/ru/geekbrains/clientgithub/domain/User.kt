@@ -24,7 +24,7 @@ fun getUsers(): List<User> {
     return listOf(
         User(
             Title(
-                "User1", 10, R.drawable.ic_baseline_face_24,
+                "EugeneKur", 10, R.drawable.ic_baseline_face_24,
                 listOf("1", "2", "9", "9", "9", "8")
             ),
             "Описание"
