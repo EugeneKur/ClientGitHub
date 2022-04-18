@@ -39,7 +39,6 @@ class ListUsersFragment : Fragment() {
         binding.usersRecyclerView.adapter = adapter
 
 
-
         adapter.listener = UsersAdapter.OnItemClick { user ->
             val bundle = Bundle()
             bundle.putParcelable("USER", user)
@@ -61,11 +60,9 @@ class ListUsersFragment : Fragment() {
 
         // Запросили новые данные
         viewModel.getUser()
-
     }
 
     private fun render(state: AppState) {
-
         when (state) {
             is AppState.Success<*> -> {
 

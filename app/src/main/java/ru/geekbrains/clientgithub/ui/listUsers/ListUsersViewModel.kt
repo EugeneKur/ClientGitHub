@@ -16,7 +16,6 @@ class ListUsersViewModel : ViewModel(), UserContracts.ViewModelContract {
 
     override fun getUser() {
         liveDataToObserve.value = AppState.Loading
-
         Thread {
             Thread.sleep(1000)
 

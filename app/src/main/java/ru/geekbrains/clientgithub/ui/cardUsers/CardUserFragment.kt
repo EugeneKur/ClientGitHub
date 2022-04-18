@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
+import ru.geekbrains.clientgithub.domain.GitProjectEntity
 import ru.geekbrains.clientgithub.utils.AppState
 
 class CardUserFragment : Fragment() {
@@ -37,7 +38,6 @@ class CardUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val user = arguments?.getParcelable<User>("USER")
         binding.nameUserTextView.text = user?.title?.name ?: ""
         user?.title?.image?.let { binding.userImageView.setImageResource(it) }
@@ -50,18 +50,18 @@ class CardUserFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, { state ->
             render(state)
         })
+
         name = user?.title?.name.toString()
         // Запросили новые данные
-        viewModel.getProjects(name)
+        viewModel.getProjectsRetrofit(name)
 
     }
 
     private fun render(state: AppState) {
-
         when (state) {
             is AppState.Success<*> -> {
-
-                val project: List<String> = state.data as List<String>
+                val project: List<GitProjectEntity> = state.data as List<GitProjectEntity>
+//                val project: List<String> = state.data as List<String>
                 adapter.setProject(project)
             }
             is AppState.Error -> {
