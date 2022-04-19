@@ -8,11 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.clientgithub.R
 import ru.geekbrains.clientgithub.data.User
+import ru.geekbrains.clientgithub.databinding.UsersItemLayoutBinding
 
 class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserItemViewHolder>() {
 
     private var user: List<User> = listOf()
     var listener: OnItemClick? = null
+
 
 
     fun setUser(data: List<User>) {
@@ -37,13 +39,21 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserItemViewHolder>() {
     }
 
     inner class UserItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = UsersItemLayoutBinding.bind(view)
+
         fun bind(user: User) {
-            itemView.findViewById<TextView>(R.id.name_user_item_text_view).text = user.title.name
-            itemView.findViewById<ImageView>(R.id.user_item_image_view)
-                .setImageResource(user.title.image)
-            itemView.setOnClickListener {
+            binding.nameUserItemTextView.text = user.title.name
+            binding.userItemImageView.setImageResource(user.title.image)
+            binding.root.setOnClickListener {
                 listener?.onClick(user)
             }
+
+//            itemView.findViewById<TextView>(R.id.name_user_item_text_view).text = user.title.name
+//            itemView.findViewById<ImageView>(R.id.user_item_image_view)
+//                .setImageResource(user.title.image)
+//            itemView.setOnClickListener {
+//                listener?.onClick(user)
+//            }
         }
     }
 
