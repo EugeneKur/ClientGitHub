@@ -2,6 +2,7 @@ package ru.geekbrains.clientgithub
 
 import android.app.Application
 import android.content.Context
+import androidx.fragment.app.Fragment
 import ru.geekbrains.clientgithub.data.RepositoryImpl
 import ru.geekbrains.clientgithub.domain.Repository
 
