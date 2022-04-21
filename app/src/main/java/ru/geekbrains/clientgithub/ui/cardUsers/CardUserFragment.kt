@@ -6,20 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.geekbrains.clientgithub.App
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
 import ru.geekbrains.clientgithub.domain.GitProjectEntity
 import ru.geekbrains.clientgithub.utils.AppState
 
 class CardUserFragment : Fragment() {
+
     companion object {
-        fun newInstance(bundle: Bundle?): CardUserFragment {
-            val fragment = CardUserFragment()
-            fragment.arguments = bundle
-            return fragment
+        private const val USER_ARGS_KEY = "USER"
+        fun newInstance(user: User) = CardUserFragment().apply {
+            arguments = Bundle()
+            arguments?.putParcelable(USER_ARGS_KEY, user)
         }
     }
+
 
     private var _binding: CardUserFragmentBinding? = null
     private val binding get() = _binding!!
@@ -62,7 +63,6 @@ class CardUserFragment : Fragment() {
         when (state) {
             is AppState.Success<*> -> {
                 val project: List<GitProjectEntity> = state.data as List<GitProjectEntity>
-//                val project: List<String> = state.data as List<String>
                 adapter.setProject(project)
             }
             is AppState.Error -> {
@@ -74,7 +74,6 @@ class CardUserFragment : Fragment() {
         }
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

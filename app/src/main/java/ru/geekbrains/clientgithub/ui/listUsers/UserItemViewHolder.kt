@@ -20,11 +20,11 @@ class UserItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun bind(user: User, listener: UsersAdapter.OnItemClick) {
+    fun bind(user: User, listener: (User) -> Unit) {
         binding.nameUserItemTextView.text = user.title.name
         binding.userItemImageView.setImageResource(user.title.image)
         binding.root.setOnClickListener {
-            listener.onClick(user)
+            listener.invoke(user)
         }
     }
 }
