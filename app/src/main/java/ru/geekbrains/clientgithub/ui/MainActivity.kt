@@ -2,6 +2,7 @@ package ru.geekbrains.clientgithub.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.ActivityMainBinding
 import ru.geekbrains.clientgithub.ui.cardUsers.CardUserFragment
@@ -16,9 +17,13 @@ class MainActivity : AppCompatActivity(), ListUsersFragment.Controller {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .add(binding.mainContainer.id, ListUsersFragment.newInstance())
-            .commit()
+        if (savedInstanceState == null) {
+            val listUsersFragment: Fragment = ListUsersFragment()
+            listUsersFragment.retainInstance = true
+            supportFragmentManager.beginTransaction()
+                .add(binding.mainContainer.id, listUsersFragment)
+                .commit()
+        }
     }
 
     override fun openScreen(user: User) {

@@ -13,9 +13,6 @@ import ru.geekbrains.clientgithub.utils.AppState
 
 class ListUsersFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ListUsersFragment()
-    }
 
     private var _binding: ListUsersFragmentBinding? = null
     private val binding get() = _binding!!
@@ -45,6 +42,7 @@ class ListUsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding.usersRecyclerView.adapter = adapter
 
