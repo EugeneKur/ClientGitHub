@@ -3,28 +3,19 @@ package ru.geekbrains.clientgithub.ui.cardUsers
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.clientgithub.R
-import ru.geekbrains.clientgithub.data.User
+import ru.geekbrains.clientgithub.databinding.RepoItemLayoutBinding
 import ru.geekbrains.clientgithub.domain.GitProjectEntity
 
 class GitProjectsAdapter : RecyclerView.Adapter<GitProjectsAdapter.RepoItemViewHolder>() {
 
     private var project: List<GitProjectEntity> = listOf()
-//    private var project: List<String> = listOf()
-    var listener: OnItemClick? = null
-
 
     fun setProject(data: List<GitProjectEntity>) {
         project = data
         notifyDataSetChanged()
     }
-
-//    fun setProject(data: List<String>) {
-//        project = data
-//        notifyDataSetChanged()
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoItemViewHolder {
         return RepoItemViewHolder(
@@ -38,20 +29,12 @@ class GitProjectsAdapter : RecyclerView.Adapter<GitProjectsAdapter.RepoItemViewH
 
     override fun getItemCount(): Int = project.size
 
-    fun interface OnItemClick {
-        fun onClick(user: User)
-    }
-
     inner class RepoItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = RepoItemLayoutBinding.bind(view)
+
         fun bind(project: GitProjectEntity) {
-            itemView.findViewById<TextView>(R.id.name_repo_text_view).text = project.name
+            binding.nameRepoTextView.text = project.name
         }
     }
-
-//    inner class RepoItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        fun bind(project: String) {
-//            itemView.findViewById<TextView>(R.id.name_repo_text_view).text = project
-//        }
-//    }
 
 }

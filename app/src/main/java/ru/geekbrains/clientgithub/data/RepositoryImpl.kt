@@ -1,6 +1,5 @@
 package ru.geekbrains.clientgithub.data
 
-import android.content.Context
 import com.example.retrofitrx.data.retrofit.GitHubApi
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit

@@ -6,21 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.geekbrains.clientgithub.App
+import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
 import ru.geekbrains.clientgithub.domain.GitProjectEntity
+import ru.geekbrains.clientgithub.ui.listUsers.ListUsersViewModel
 import ru.geekbrains.clientgithub.utils.AppState
+import java.util.*
 
 class CardUserFragment : Fragment() {
+
     companion object {
-        fun newInstance(bundle: Bundle?): CardUserFragment {
-            val fragment = CardUserFragment()
-            fragment.arguments = bundle
-            return fragment
+        private const val USER_ARGS_KEY = "USER"
+        fun newInstance(user: User) = CardUserFragment().apply {
+            arguments = Bundle()
+            arguments?.putParcelable(USER_ARGS_KEY, user)
         }
     }
 
+    private val keyViewModelId = "key_card_view_model"
     private var _binding: CardUserFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = GitProjectsAdapter()
@@ -45,8 +49,14 @@ class CardUserFragment : Fragment() {
 
         binding.projectsRecyclerView.adapter = adapter
 
-        viewModel = ViewModelProvider(this).get(CardUserViewModel::class.java)
-
+        if (savedInstanceState != null) {
+            val viewModelId = savedInstanceState.getString(keyViewModelId)!!
+            viewModel = app.viewModelStore.getViewModel(viewModelId) as CardUserViewModel
+        } else {
+            val id = UUID.randomUUID().toString()
+            viewModel = CardUserViewModel(id)
+            app.viewModelStore.saveViewModel(viewModel)
+        }
         // Подписались на изменения liveData
         viewModel.getData().observe(viewLifecycleOwner, { state ->
             render(state)
@@ -58,11 +68,15 @@ class CardUserFragment : Fragment() {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(keyViewModelId, viewModel.id)
+    }
+
     private fun render(state: AppState) {
         when (state) {
             is AppState.Success<*> -> {
                 val project: List<GitProjectEntity> = state.data as List<GitProjectEntity>
-//                val project: List<String> = state.data as List<String>
                 adapter.setProject(project)
             }
             is AppState.Error -> {
@@ -74,7 +88,6 @@ class CardUserFragment : Fragment() {
         }
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

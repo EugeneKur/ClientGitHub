@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.geekbrains.clientgithub.App
-import ru.geekbrains.clientgithub.data.RepositoryImpl
 import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.AppState
+import ru.geekbrains.clientgithub.utils.BaseViewModel
 
-class ListUsersViewModel : ViewModel(), UserContracts.ViewModelContract {
+class ListUsersViewModel(override val id: String) : ViewModel(), UserContracts.ViewModelContract, BaseViewModel {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val repo: Repository = App().gitProjectsRepo

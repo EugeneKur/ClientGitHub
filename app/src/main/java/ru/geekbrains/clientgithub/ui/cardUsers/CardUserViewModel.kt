@@ -6,12 +6,11 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import ru.geekbrains.clientgithub.App
-import ru.geekbrains.clientgithub.data.RepositoryImpl
-import ru.geekbrains.clientgithub.domain.GitProjectEntity
 import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.AppState
+import ru.geekbrains.clientgithub.utils.BaseViewModel
 
-class CardUserViewModel : ViewModel(), CardContracts.ViewModelContract {
+class CardUserViewModel(override val id: String) : ViewModel(), CardContracts.ViewModelContract, BaseViewModel {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val repo: Repository = App().gitProjectsRepo
