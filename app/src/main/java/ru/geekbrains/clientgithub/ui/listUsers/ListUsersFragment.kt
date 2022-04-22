@@ -54,11 +54,7 @@ class ListUsersFragment : Fragment() {
         } else {
             val id = UUID.randomUUID().toString()
             viewModel = ListUsersViewModel(id)
-
             app.viewModelStore.saveViewModel(viewModel)
-
-
-
         }
 // Подписались на изменения liveData
         viewModel.getData().observe(viewLifecycleOwner, { state ->

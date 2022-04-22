@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
 import ru.geekbrains.clientgithub.domain.GitProjectEntity
+import ru.geekbrains.clientgithub.ui.listUsers.ListUsersViewModel
 import ru.geekbrains.clientgithub.utils.AppState
+import java.util.*
 
 class CardUserFragment : Fragment() {
 
@@ -21,7 +24,7 @@ class CardUserFragment : Fragment() {
         }
     }
 
-
+    private val keyViewModelId = "key_card_view_model"
     private var _binding: CardUserFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = GitProjectsAdapter()
@@ -46,8 +49,14 @@ class CardUserFragment : Fragment() {
 
         binding.projectsRecyclerView.adapter = adapter
 
-        viewModel = ViewModelProvider(this).get(CardUserViewModel::class.java)
-
+        if (savedInstanceState != null) {
+            val viewModelId = savedInstanceState.getString(keyViewModelId)!!
+            viewModel = app.viewModelStore.getViewModel(viewModelId) as CardUserViewModel
+        } else {
+            val id = UUID.randomUUID().toString()
+            viewModel = CardUserViewModel(id)
+            app.viewModelStore.saveViewModel(viewModel)
+        }
         // Подписались на изменения liveData
         viewModel.getData().observe(viewLifecycleOwner, { state ->
             render(state)
@@ -57,6 +66,11 @@ class CardUserFragment : Fragment() {
         // Запросили новые данные
         viewModel.getProjectsRetrofit(name)
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(keyViewModelId, viewModel.id)
     }
 
     private fun render(state: AppState) {
