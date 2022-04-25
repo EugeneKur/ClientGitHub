@@ -5,9 +5,8 @@ import ru.geekbrains.clientgithub.data.User
 
 
 interface Repository {
-    fun getUserFromServer(name: String): Single<List<GitProjectEntity>>
+    fun getProjectsUserFromServer(name: String): Single<List<GitProjectEntity>>
 
     fun getUserFromLocalStorage(): List<User>
 
-    fun getPojectsUsersFromLocalStorage(name: String): List<String>
 }

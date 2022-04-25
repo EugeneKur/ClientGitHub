@@ -22,18 +22,18 @@ class CardUserViewModel(override val id: String) : ViewModel(), CardContracts.Vi
     override fun getProjectsRetrofit(name: String) {
         compositeDisposable.add(
             repo
-                .getUserFromServer(name)
+                .getProjectsUserFromServer(name)
                 .subscribeBy {
                 liveDataToObserve.postValue(AppState.Success(it))
             }
         )
     }
 
-    override fun getProjects(name: String) {
-        liveDataToObserve.value = AppState.Loading
-        val project = repo.getPojectsUsersFromLocalStorage(name)
-        liveDataToObserve.postValue(AppState.Success(project))
-    }
+//    override fun getProjects(name: String) {
+//        liveDataToObserve.value = AppState.Loading
+//        val project = repo.getPojectsUsersFromLocalStorage(name)
+//        liveDataToObserve.postValue(AppState.Success(project))
+//    }
 
 }
 

@@ -1,4 +1,4 @@
-package com.example.retrofitrx.data.retrofit
+package ru.geekbrains.clientgithub.data.web.github
 
 
 import io.reactivex.rxjava3.core.Single

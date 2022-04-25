@@ -3,7 +3,8 @@ package ru.geekbrains.clientgithub
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
-import ru.geekbrains.clientgithub.data.RepositoryImpl
+import ru.geekbrains.clientgithub.data.fake.FakeRepositoryImpl
+import ru.geekbrains.clientgithub.data.web.github.RepositoryImpl
 import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.ViewModelStore
 
