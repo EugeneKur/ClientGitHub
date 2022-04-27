@@ -3,7 +3,6 @@ package ru.geekbrains.clientgithub.data.db
 import ru.geekbrains.clientgithub.R
 import ru.geekbrains.clientgithub.data.Title
 import ru.geekbrains.clientgithub.data.User
-import ru.geekbrains.clientgithub.domain.GitProjectEntity
 
 class Users {
     val users: List<User> = listOf(

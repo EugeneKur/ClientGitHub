@@ -29,11 +29,5 @@ class CardUserViewModel(override val id: String, private val repository: Reposit
         )
     }
 
-//    override fun getProjects(name: String) {
-//        liveDataToObserve.value = AppState.Loading
-//        val project = repo.getPojectsUsersFromLocalStorage(name)
-//        liveDataToObserve.postValue(AppState.Success(project))
-//    }
-
 }
 

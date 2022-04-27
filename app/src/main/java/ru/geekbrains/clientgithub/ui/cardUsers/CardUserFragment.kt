@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import org.koin.android.ext.android.inject
 import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
 import ru.geekbrains.clientgithub.domain.GitProjectEntity
 import ru.geekbrains.clientgithub.domain.Repository
-import ru.geekbrains.clientgithub.ui.listUsers.ListUsersViewModel
 import ru.geekbrains.clientgithub.utils.AppState
 import java.util.*
 

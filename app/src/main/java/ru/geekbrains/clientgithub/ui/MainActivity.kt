@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity(), ListUsersFragment.Controller {
 
         if (savedInstanceState == null) {
             val listUsersFragment: Fragment = ListUsersFragment()
-//            listUsersFragment.retainInstance = true
             supportFragmentManager.beginTransaction()
                 .add(binding.mainContainer.id, listUsersFragment)
                 .commit()
