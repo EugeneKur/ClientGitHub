@@ -10,10 +10,10 @@ import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.AppState
 import ru.geekbrains.clientgithub.utils.BaseViewModel
 
-class CardUserViewModel(override val id: String) : ViewModel(), CardContracts.ViewModelContract, BaseViewModel {
+class CardUserViewModel(override val id: String, private val repository: Repository) : ViewModel(), CardContracts.ViewModelContract, BaseViewModel {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val repo: Repository = App().gitProjectsRepo
+    private val repo: Repository = repository
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -22,17 +22,11 @@ class CardUserViewModel(override val id: String) : ViewModel(), CardContracts.Vi
     override fun getProjectsRetrofit(name: String) {
         compositeDisposable.add(
             repo
-                .getUserFromServer(name)
+                .getProjectsUserFromServer(name)
                 .subscribeBy {
                 liveDataToObserve.postValue(AppState.Success(it))
             }
         )
-    }
-
-    override fun getProjects(name: String) {
-        liveDataToObserve.value = AppState.Loading
-        val project = repo.getPojectsUsersFromLocalStorage(name)
-        liveDataToObserve.postValue(AppState.Success(project))
     }
 
 }

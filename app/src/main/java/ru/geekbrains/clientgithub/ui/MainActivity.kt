@@ -11,7 +11,6 @@ import ru.geekbrains.clientgithub.ui.listUsers.ListUsersFragment
 class MainActivity : AppCompatActivity(), ListUsersFragment.Controller {
 
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -19,7 +18,6 @@ class MainActivity : AppCompatActivity(), ListUsersFragment.Controller {
 
         if (savedInstanceState == null) {
             val listUsersFragment: Fragment = ListUsersFragment()
-//            listUsersFragment.retainInstance = true
             supportFragmentManager.beginTransaction()
                 .add(binding.mainContainer.id, listUsersFragment)
                 .commit()

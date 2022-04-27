@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import org.koin.android.ext.android.inject
 import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.ListUsersFragmentBinding
+import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.AppState
 import java.util.*
 
 class ListUsersFragment : Fragment() {
-
 
     private val keyViewModelId = "key_view_model"
     private var _binding: ListUsersFragmentBinding? = null
@@ -22,6 +22,7 @@ class ListUsersFragment : Fragment() {
     private val adapter = UsersAdapter { user ->
         controller.openScreen(user)
     }
+    private val repo: Repository by inject()
 
     private lateinit var viewModel: ListUsersViewModel
 
@@ -53,7 +54,7 @@ class ListUsersFragment : Fragment() {
             viewModel = app.viewModelStore.getViewModel(viewModelId) as ListUsersViewModel
         } else {
             val id = UUID.randomUUID().toString()
-            viewModel = ListUsersViewModel(id)
+            viewModel = ListUsersViewModel(id, repo)
             app.viewModelStore.saveViewModel(viewModel)
         }
 // Подписались на изменения liveData
