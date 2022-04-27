@@ -10,10 +10,10 @@ import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.AppState
 import ru.geekbrains.clientgithub.utils.BaseViewModel
 
-class CardUserViewModel(override val id: String) : ViewModel(), CardContracts.ViewModelContract, BaseViewModel {
+class CardUserViewModel(override val id: String, private val repository: Repository) : ViewModel(), CardContracts.ViewModelContract, BaseViewModel {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val repo: Repository = App().gitProjectsRepo
+    private val repo: Repository = repository
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import org.koin.android.ext.android.inject
 import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
 import ru.geekbrains.clientgithub.domain.GitProjectEntity
+import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.ui.listUsers.ListUsersViewModel
 import ru.geekbrains.clientgithub.utils.AppState
 import java.util.*
@@ -29,6 +31,7 @@ class CardUserFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter = GitProjectsAdapter()
     private var name: String = ""
+    private val repo: Repository by inject()
 
     private lateinit var viewModel: CardUserViewModel
 
@@ -54,7 +57,7 @@ class CardUserFragment : Fragment() {
             viewModel = app.viewModelStore.getViewModel(viewModelId) as CardUserViewModel
         } else {
             val id = UUID.randomUUID().toString()
-            viewModel = CardUserViewModel(id)
+            viewModel = CardUserViewModel(id, repo)
             app.viewModelStore.saveViewModel(viewModel)
         }
         // Подписались на изменения liveData
