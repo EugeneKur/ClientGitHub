@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.koin.android.ext.android.inject
+//import org.koin.android.ext.android.inject
 import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
@@ -13,6 +13,7 @@ import ru.geekbrains.clientgithub.domain.GitProjectEntity
 import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.AppState
 import java.util.*
+import javax.inject.Inject
 
 class CardUserFragment : Fragment() {
 
@@ -29,7 +30,10 @@ class CardUserFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter = GitProjectsAdapter()
     private var name: String = ""
-    private val repo: Repository by inject()
+
+    @Inject
+    lateinit var repo: Repository
+//    private val repo: Repository by inject()
 
     private lateinit var viewModel: CardUserViewModel
 
@@ -44,6 +48,9 @@ class CardUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        app.appDependenciesComponent.injectCard(this)
+
         val user = arguments?.getParcelable<User>("USER")
         binding.nameUserTextView.text = user?.title?.name ?: ""
         user?.title?.image?.let { binding.userImageView.setImageResource(it) }
