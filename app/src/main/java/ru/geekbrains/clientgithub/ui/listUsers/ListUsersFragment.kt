@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.koin.android.ext.android.inject
+//import org.koin.android.ext.android.inject
 import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
 import ru.geekbrains.clientgithub.databinding.ListUsersFragmentBinding
 import ru.geekbrains.clientgithub.domain.Repository
 import ru.geekbrains.clientgithub.utils.AppState
 import java.util.*
+import javax.inject.Inject
 
 class ListUsersFragment : Fragment() {
 
@@ -22,7 +23,9 @@ class ListUsersFragment : Fragment() {
     private val adapter = UsersAdapter { user ->
         controller.openScreen(user)
     }
-    private val repo: Repository by inject()
+    @Inject
+    lateinit var repo: Repository
+//    private val repo: Repository by inject()
 
     private lateinit var viewModel: ListUsersViewModel
 
@@ -46,6 +49,8 @@ class ListUsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        app.appDependenciesComponent.inject(this)
 
         binding.usersRecyclerView.adapter = adapter
 

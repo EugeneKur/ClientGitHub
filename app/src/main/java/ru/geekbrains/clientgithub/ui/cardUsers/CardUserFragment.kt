@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.koin.android.ext.android.inject
+//import org.koin.android.ext.android.inject
 import ru.geekbrains.clientgithub.app
 import ru.geekbrains.clientgithub.data.User
+import ru.geekbrains.clientgithub.data.fake.FakeRepositoryImpl
 import ru.geekbrains.clientgithub.databinding.CardUserFragmentBinding
 import ru.geekbrains.clientgithub.domain.GitProjectEntity
 import ru.geekbrains.clientgithub.domain.Repository
@@ -29,7 +30,7 @@ class CardUserFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter = GitProjectsAdapter()
     private var name: String = ""
-    private val repo: Repository by inject()
+    private val repo: Repository = FakeRepositoryImpl()
 
     private lateinit var viewModel: CardUserViewModel
 
@@ -44,6 +45,7 @@ class CardUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val user = arguments?.getParcelable<User>("USER")
         binding.nameUserTextView.text = user?.title?.name ?: ""
         user?.title?.image?.let { binding.userImageView.setImageResource(it) }
