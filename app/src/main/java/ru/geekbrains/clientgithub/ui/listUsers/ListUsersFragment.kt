@@ -50,7 +50,7 @@ class ListUsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        app.appDependenciesComponent.inject(this)
+        app.appDependenciesComponent.injectList(this)
 
         binding.usersRecyclerView.adapter = adapter
 

@@ -1,6 +1,7 @@
 package ru.geekbrains.clientgithub.di
 
 import dagger.Component
+import ru.geekbrains.clientgithub.ui.cardUsers.CardUserFragment
 import ru.geekbrains.clientgithub.ui.listUsers.ListUsersFragment
 import javax.inject.Singleton
 
@@ -12,5 +13,6 @@ import javax.inject.Singleton
     ]
 )
 interface AppDependenciesComponent {
-    fun inject(listUserFragment: ListUsersFragment)
+    fun injectList(listUserFragment: ListUsersFragment)
+    fun injectCard(cardUserFragment: CardUserFragment)
 }
